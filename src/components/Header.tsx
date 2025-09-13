@@ -15,35 +15,35 @@ export default function Header() {
         <div className="flex items-center gap-6">
           <button
             className="md:hidden p-2 rounded border border-blue/20 text-blue"
-            aria-label={open ? "Close menu" : "Open menu"}
+            aria-label={open ? "Cerrar menú" : "Abrir menú"}
             onClick={() => setOpen(!open)}
           >
             {open ? <IconX /> : <IconMenu />}
           </button>
 
-          <Link href="/" className="font-script font-bold text-blue text-3xl md:text-4xl" aria-label="Chaska Home">
+          <Link href="/" className="font-script font-bold text-blue text-3xl md:text-4xl" aria-label="Inicio de Chaska">
             Chaska
           </Link>
         </div>
 
         {/* Center: Main nav */}
         <nav className="hidden md:flex items-center gap-8">
-          <Link href="/" className="type-ui text-olive hover:text-blue transition-colors">Home</Link>
-          <Link href="/menu" className="type-ui text-olive hover:text-blue transition-colors">Menu</Link>
-          <Link href="/events" className="type-ui text-olive hover:text-blue transition-colors">Events</Link>
-          <Link href="/wine-club" className="type-ui text-olive hover:text-blue transition-colors">Wine Club</Link>
+          <Link href="/" className="type-ui text-olive hover:text-blue transition-colors">Inicio</Link>
+          <Link href="/menu" className="type-ui text-olive hover:text-blue transition-colors">Menú</Link>
+          <Link href="/events" className="type-ui text-olive hover:text-blue transition-colors">Eventos</Link>
+          <Link href="/wine-club" className="type-ui text-olive hover:text-blue transition-colors">Club de Vinos</Link>
         </nav>
 
         {/* Right: CTAs */}
         <div className="hidden sm:flex items-center gap-3">
           <a href={`tel:${PHONE.replace(/\s/g, "")}`} className="type-ui text-olive hover:text-blue transition-colors">
-            Call
+            Llamar
           </a>
           <Link
             href="/events"
             className="type-ui rounded-full border border-blue/40 text-blue hover:bg-blue hover:text-white transition-colors px-4 py-2"
           >
-            Book
+            Reservar
           </Link>
         </div>
       </div>
@@ -53,34 +53,34 @@ export default function Header() {
         <div className="md:hidden border-t border-blue/10 bg-background">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 py-4 grid gap-2">
             <Link href="/" className="type-ui py-2 text-olive hover:text-blue" onClick={() => setOpen(false)}>
-              Home
+              Inicio
             </Link>
             <Link href="/menu" className="type-ui py-2 text-olive hover:text-blue" onClick={() => setOpen(false)}>
-              Menu
+              Menú
             </Link>
             <div className="pl-3">
               <a href="/menu#food" className="type-small block py-1 text-olive/80 hover:text-blue" onClick={() => setOpen(false)}>
-                Food
+                Comida
               </a>
               <a href="/menu#drinks" className="type-small block py-1 text-olive/80 hover:text-blue" onClick={() => setOpen(false)}>
-                Drinks
+                Bebidas
               </a>
             </div>
             <Link href="/events" className="type-ui py-2 text-olive hover:text-blue" onClick={() => setOpen(false)}>
-              Events
+              Eventos
             </Link>
             <Link href="/wine-club" className="type-ui py-2 text-olive hover:text-blue" onClick={() => setOpen(false)}>
-              Wine Club
+              Club de Vinos
             </Link>
             <hr className="my-2 border-blue/10" />
             <a href={`tel:${PHONE.replace(/\s/g, "")}`} className="type-ui py-2 text-blue" onClick={() => setOpen(false)}>
-              Call Us: {PHONE}
+              Llámanos: {PHONE}
             </a>
             <a href="/#visit" className="type-ui py-2 text-olive hover:text-blue" onClick={() => setOpen(false)}>
-              Find Us
+              Cómo llegar
             </a>
             <Link href="/events" className="type-ui py-2 rounded-full text-center bg-blue text-white mt-2" onClick={() => setOpen(false)}>
-              Book Now
+              Reservar ahora
             </Link>
           </div>
         </div>

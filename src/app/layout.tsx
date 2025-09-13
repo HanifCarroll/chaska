@@ -34,8 +34,9 @@ const dancing = Dancing_Script({
 });
 
 export const metadata: Metadata = {
-  title: "Chaska — Neighborhood Smokehouse",
-  description: "Homely, modern barbecue. Low & slow, shared with friends.",
+  title: "Chaska — Milanesas de autor y cocina de mundo",
+  description:
+    "Tu punto de encuentro en Chacarita: milanesas de autor, tacos de mochella y papas wagyu. Ingredientes argentinos con influencias del mundo.",
 };
 
 export default function RootLayout({
@@ -44,7 +45,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="es">
       <body
         className={`${inter.variable} ${plexMono.variable} ${gloock.variable} ${dancing.variable} antialiased`}
       >

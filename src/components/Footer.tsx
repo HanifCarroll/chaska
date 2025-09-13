@@ -1,8 +1,8 @@
 import Link from "next/link";
 
-const PHONE = process.env.NEXT_PUBLIC_PHONE ?? "+34 600 000 000";
-const IG_HANDLE = process.env.NEXT_PUBLIC_INSTAGRAM ?? "chaska.restaurant";
-const IG_URL = `https://instagram.com/${IG_HANDLE.replace(/^@/, "")}`;
+const PHONE = process.env.NEXT_PUBLIC_PHONE;
+const IG_HANDLE = process.env.NEXT_PUBLIC_INSTAGRAM;
+const IG_URL = `https://instagram.com/${IG_HANDLE}`;
 
 export default function Footer() {
   return (
@@ -28,7 +28,7 @@ export default function Footer() {
                 rel="noopener noreferrer"
                 className="type-ui text-white/80 hover:text-gold"
               >
-                Directions
+                Cómo llegar
               </a>
             </div>
           </div>
@@ -36,41 +36,41 @@ export default function Footer() {
           {/* Contact */}
           <div className="md:text-right space-y-2">
             <a
-              href={`tel:${PHONE.replace(/\s/g, "")}`}
+              href={`tel:${PHONE}`}
               className="type-ui text-white/90 hover:text-gold block"
             >
               {PHONE}
             </a>
             <div className="mt-3">
-              <p className="type-ui text-white/60">Hours</p>
+              <p className="type-ui text-white/60">Horarios</p>
               <ul className="mt-1 space-y-1 type-small text-white/70">
                 <li className="flex items-center justify-between gap-6">
-                  <span>Monday</span>
-                  <span>12:30–3 PM</span>
+                  <span>Lunes</span>
+                  <span>12:30–15 h</span>
                 </li>
                 <li className="flex items-center justify-between gap-6">
-                  <span>Tuesday</span>
-                  <span>12:30–3 PM</span>
+                  <span>Martes</span>
+                  <span>12:30–15 h</span>
                 </li>
                 <li className="flex items-center justify-between gap-6">
-                  <span>Wednesday</span>
-                  <span>12:30–3 PM</span>
+                  <span>Miércoles</span>
+                  <span>12:30–15 h</span>
                 </li>
                 <li className="flex items-center justify-between gap-6">
-                  <span>Thursday</span>
-                  <span>12:30–3 PM</span>
+                  <span>Jueves</span>
+                  <span>12:30–15 h</span>
                 </li>
                 <li className="flex items-center justify-between gap-6">
-                  <span>Friday</span>
-                  <span>12:30–3 PM</span>
+                  <span>Viernes</span>
+                  <span>12:30–15 h</span>
                 </li>
                 <li className="flex items-center justify-between gap-6">
-                  <span>Saturday</span>
-                  <span>Closed</span>
+                  <span>Sábado</span>
+                  <span>Cerrado</span>
                 </li>
                 <li className="flex items-center justify-between gap-6">
-                  <span>Sunday</span>
-                  <span>Closed</span>
+                  <span>Domingo</span>
+                  <span>Cerrado</span>
                 </li>
               </ul>
             </div>
@@ -98,7 +98,7 @@ export default function Footer() {
             © {new Date().getFullYear()} Chaska
           </p>
           <p className="type-small text-white/50">
-            Made with care — Buenos Aires
+            Hecho con cariño — Buenos Aires
           </p>
         </div>
       </div>
