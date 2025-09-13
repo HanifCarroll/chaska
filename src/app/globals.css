@@ -1,26 +1,96 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Soft, homely off‑white background and calm foreground */
+  --background: #faf7f2;
+  --foreground: #1f2937; /* slate-800 */
+
+  /* Palette (muted) */
+  --blue: #2f4a63;      /* deep muted blue */
+  --olive: #3f4b3a;     /* dark olive green */
+  --brick: #a44335;     /* brick red */
+  --gold: #c4a25b;      /* muted gold */
+  --white: #ffffff;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-blue: var(--blue);
+  --color-olive: var(--olive);
+  --color-brick: var(--brick);
+  --color-gold: var(--gold);
+  --color-white: var(--white);
+  --font-display: var(--font-gloock), ui-serif, Georgia, "Times New Roman", serif;
+  --font-script: var(--font-dancing), cursive;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-mono: var(--font-plex-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #0b0e10;
+    --foreground: #e5e7eb;
+    --blue: #94b2d0; /* lighter for dark contrast */
+    --olive: #a3b29f;
+    --brick: #e08a7f;
+    --gold: #d9c183;
+    --white: #ffffff;
   }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+}
+
+/* Typography scale and utilities */
+@layer components {
+  /* H1 – Hero Headline */
+  .type-h1 {
+    @apply font-display font-bold text-[48px] md:text-[64px] leading-[110%] tracking-[-0.01em];
+  }
+
+  /* H2 – Section Titles */
+  .type-h2 {
+    @apply font-display font-semibold text-[32px] md:text-[40px] leading-[120%] tracking-[-0.005em];
+  }
+
+  /* H3 – Subsection / Menu Category */
+  .type-h3 {
+    @apply font-display font-medium text-[24px] md:text-[28px] leading-[130%] tracking-normal;
+  }
+
+  /* Body Text (Paragraphs) */
+  .type-body {
+    @apply font-sans font-normal text-[16px] md:text-[18px] leading-[150%] tracking-normal;
+  }
+
+  /* Small Text / Labels */
+  .type-small {
+    @apply font-mono font-normal text-[12px] md:text-[14px] leading-[140%] tracking-[0.02em];
+  }
+
+  /* Links & Buttons (UI / CTAs) */
+  .type-ui {
+    @apply font-sans font-medium md:font-semibold text-[14px] md:text-[16px] leading-[140%] tracking-[0.01em];
+  }
+}
+
+/* Base element mapping (safe defaults) */
+@layer base {
+  h1 { @apply font-display font-bold text-[48px] md:text-[64px] leading-[110%] tracking-[-0.01em]; }
+  h2 { @apply font-display font-semibold text-[32px] md:text-[40px] leading-[120%] tracking-[-0.005em]; }
+  h3 { @apply font-display font-medium text-[24px] md:text-[28px] leading-[130%] tracking-normal; }
+  p { @apply font-sans font-normal text-[16px] md:text-[18px] leading-[150%] tracking-normal; }
+}
+
+/* Define custom utilities using Tailwind v4 @utility */
+@utility font-display {
+  font-family: var(--font-display);
+}
+
+@utility font-script {
+  font-family: var(--font-script);
 }
