@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, IBM_Plex_Mono, Gloock, Dancing_Script } from "next/font/google";
+import Header from "@/components/Header";
 import "./globals.css";
 
 // Fonts
@@ -46,6 +47,7 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${plexMono.variable} ${gloock.variable} ${dancing.variable} antialiased`}
       >
+        <Header />
         {children}
       </body>
     </html>
