@@ -50,6 +50,14 @@ html, body {
   overflow-x: hidden;
 }
 
+/* Smooth scrolling for in-page anchors, respecting reduced-motion */
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}
+
+/* Helpful offset so anchored targets aren't hidden behind fixed header */
+[id] { scroll-margin-top: 88px; }
+
 /* Typography scale and utilities */
 @layer components {
   /* H1 – Hero Headline */
@@ -168,6 +176,24 @@ html, body {
     transition: transform 240ms ease-out;
   }
   .link-underline:hover::after { transform: scaleX(1); }
+
+  /* Buttons */
+  .btn {
+    @apply inline-flex items-center justify-center rounded-xl h-11 md:h-12 px-5 font-sans font-medium md:font-semibold text-[14px] md:text-[16px] leading-[140%] tracking-[0.01em] transition-all duration-200 select-none;
+  }
+  .btn-primary {
+    @apply bg-blue text-white shadow-sm hover:bg-blue/90 hover:-translate-y-[1px] active:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue/40;
+  }
+  .btn-secondary {
+    @apply border-2 border-blue text-blue bg-transparent hover:bg-blue hover:text-white hover:-translate-y-[1px] active:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue/30;
+  }
+  .btn-on-dark {
+    @apply bg-white text-blue shadow-sm hover:bg-white/90 hover:-translate-y-[1px] active:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70;
+  }
+  /* Higher-contrast button specifically for dark cards */
+  .btn-contrast {
+    @apply bg-white text-foreground font-semibold border border-white shadow-md hover:shadow-lg hover:-translate-y-[1px] active:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70;
+  }
 }
 
 /* Base element mapping (safe defaults) */

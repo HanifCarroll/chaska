@@ -17,11 +17,8 @@ export default function WineClubHighlight() {
             especialmente seleccionadas.
           </p>
           <div className="mt-6">
-            <Link
-              href="/wine-club"
-              className="type-ui inline-flex items-center gap-2 rounded-full border border-blue/40 text-blue hover:bg-blue hover:text-white transition-colors px-5 py-2.5"
-            >
-              CONOCER MÁS
+            <Link href="/wine-club" className="btn btn-secondary">
+              Conocer más
             </Link>
           </div>
         </div>

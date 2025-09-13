@@ -114,10 +114,7 @@ export default function Header() {
             >
               Llamar
             </a>
-            <Link
-              href="/events"
-              className="type-ui rounded-full bg-blue text-background hover:bg-blue/90 transition-colors px-4 py-2"
-            >
+            <Link href="/events" className="btn btn-primary">
               Reservar
             </Link>
           </div>
@@ -217,7 +214,7 @@ export default function Header() {
                   </a>
                   <Link
                     href="/events"
-                    className="type-ui text-lg py-3 rounded-full text-center bg-blue text-background mt-2 hover:bg-blue/90"
+                    className="btn btn-primary w-full mt-2"
                     onClick={() => setOpen(false)}
                   >
                     Reservar ahora
