@@ -101,7 +101,7 @@ export default function Header() {
             aria-label={open ? "Cerrar menú" : "Abrir menú"}
             onClick={() => setOpen(!open)}
           >
-            <IconMenu />
+            <IconHamburger open={open} />
           </button>
         </div>
 
@@ -230,32 +230,47 @@ export default function Header() {
   );
 }
 
-function IconMenu() {
+function IconHamburger({ open }: { open: boolean }) {
+  const transition = { type: "spring", stiffness: 700, damping: 40 } as const;
   return (
-    <svg
+    <motion.svg
       width="22"
       height="22"
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
       strokeWidth="1.5"
+      aria-hidden="true"
     >
-      <path d="M4 6h16M4 12h16M4 18h16" />
-    </svg>
-  );
-}
-
-function IconX() {
-  return (
-    <svg
-      width="22"
-      height="22"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.5"
-    >
-      <path d="M6 6l12 12M18 6l-12 12" />
-    </svg>
+      <motion.line
+        x1="4"
+        y1="6"
+        x2="20"
+        y2="6"
+        strokeLinecap="round"
+        style={{ transformOrigin: "12px 12px" }}
+        animate={open ? { y: 6, rotate: 45 } : { y: 0, rotate: 0 }}
+        transition={transition}
+      />
+      <motion.line
+        x1="4"
+        y1="12"
+        x2="20"
+        y2="12"
+        strokeLinecap="round"
+        animate={open ? { opacity: 0 } : { opacity: 1 }}
+        transition={{ duration: 0.15 }}
+      />
+      <motion.line
+        x1="4"
+        y1="18"
+        x2="20"
+        y2="18"
+        strokeLinecap="round"
+        style={{ transformOrigin: "12px 12px" }}
+        animate={open ? { y: -6, rotate: -45 } : { y: 0, rotate: 0 }}
+        transition={transition}
+      />
+    </motion.svg>
   );
 }
