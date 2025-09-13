@@ -51,6 +51,10 @@ body {
   .type-h1 {
     @apply font-display font-bold text-[48px] md:text-[64px] leading-[110%] tracking-[-0.01em];
   }
+  /* Large stacked hero inspired by reference */
+  .type-hero {
+    @apply font-display font-extrabold text-[44px] sm:text-[56px] md:text-[68px] lg:text-[76px] leading-[1.06] tracking-[-0.02em];
+  }
 
   /* H2 – Section Titles */
   .type-h2 {
@@ -76,6 +80,38 @@ body {
   .type-ui {
     @apply font-sans font-medium md:font-semibold text-[14px] md:text-[16px] leading-[140%] tracking-[0.01em];
   }
+
+  /* Text CTA with baseline + animated underline */
+  .link-cta {
+    @apply font-sans font-extrabold uppercase text-[14px] md:text-[16px] leading-[140%] tracking-[0.06em] text-blue inline-block;
+    position: relative;
+    padding-bottom: 6px; /* space for underline */
+  }
+  /* Base underline (always visible) */
+  .link-cta::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 3px;
+    background-color: var(--blue);
+    opacity: 0.35;
+  }
+  /* Animated overlay underline */
+  .link-cta::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 3px;
+    width: 100%;
+    background-color: var(--blue);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 280ms ease-out;
+  }
+  .link-cta:hover::after { transform: scaleX(1); }
 }
 
 /* Base element mapping (safe defaults) */
