@@ -50,183 +50,186 @@ export default function Header() {
   }, []);
 
   return (
-    <header
-      ref={headerRef}
-      className="sticky top-0 z-50 bg-background/90 backdrop-blur border-b border-blue/10"
-    >
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 py-4 flex items-center justify-between gap-4">
-        {/* Left: Brand */}
-        <div className="flex items-center gap-6">
-          <Link
-            href="/"
-            className="font-script font-bold text-blue text-4xl md:text-5xl"
-            aria-label="Inicio de Chaska"
-          >
-            Chaska
-          </Link>
-        </div>
-
-        {/* Center: Main nav */}
-        <nav className="hidden md:flex items-center gap-8">
-          <Link
-            href="/"
-            className="type-ui nav-link text-olive hover:text-blue transition-colors"
-          >
-            Inicio
-          </Link>
-          <Link
-            href="/menu"
-            className="type-ui nav-link text-olive hover:text-blue transition-colors"
-          >
-            Menú
-          </Link>
-          <Link
-            href="/events"
-            className="type-ui nav-link text-olive hover:text-blue transition-colors"
-          >
-            Eventos
-          </Link>
-          <Link
-            href="/wine-club"
-            className="type-ui nav-link text-olive hover:text-blue transition-colors"
-          >
-            Club de Vinos
-          </Link>
-        </nav>
-
-        {/* Mobile toggle (right) */}
-        <div className="md:hidden">
-          <button
-            className="p-2 rounded border border-blue/20 text-blue"
-            aria-label={open ? "Cerrar menú" : "Abrir menú"}
-            onClick={() => setOpen(!open)}
-          >
-            <IconHamburger open={open} />
-          </button>
-        </div>
-
-        {/* Right: CTAs */}
-        <div className="hidden sm:flex items-center gap-3">
-          <a
-            href={`tel:${PHONE.replace(/\s/g, "")}`}
-            className="type-ui text-olive hover:text-blue transition-colors"
-          >
-            Llamar
-          </a>
-          <Link
-            href="/events"
-            className="type-ui rounded-full border border-blue/40 text-blue hover:bg-blue hover:text-white transition-colors px-4 py-2"
-          >
-            Reservar
-          </Link>
-        </div>
-      </div>
-
-      {/* Mobile menu: dropdown panel under header, slides down */}
-      <AnimatePresence>
-        {open && (
-          <>
-            {/* Backdrop */}
-            <motion.button
-              aria-label="Cerrar menú"
-              className="md:hidden fixed left-0 right-0 bottom-0 z-[40] bg-foreground/20 backdrop-blur-[1px]"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.2, ease: "easeOut" }}
-              onClick={() => setOpen(false)}
-              style={{ top: headerHeight }}
-            />
-
-            {/* Panel */}
-            <motion.aside
-              className="md:hidden absolute left-0 right-0 top-full z-[45] bg-background shadow-xl overflow-y-auto overscroll-none border-b border-blue/10"
-              role="dialog"
-              aria-modal="true"
-              initial={{ y: -16, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              exit={{ y: -16, opacity: 0 }}
-              transition={{
-                type: "spring",
-                stiffness: 420,
-                damping: 38,
-                mass: 0.7,
-              }}
-              style={{ height: `calc(100vh - ${headerHeight}px)` }}
+    <>
+      <header
+        ref={headerRef}
+        className="fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur border-b border-blue/10"
+      >
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 py-4 flex items-center justify-between gap-4">
+          {/* Left: Brand */}
+          <div className="flex items-center gap-6">
+            <Link
+              href="/"
+              className="font-script font-bold text-blue text-4xl md:text-5xl"
+              aria-label="Inicio de Chaska"
             >
-              <div className="px-4 sm:px-6 py-4 grid gap-2 pb-6">
-                <Link
-                  href="/"
-                  className="type-ui text-lg py-2 text-olive hover:text-blue"
-                  onClick={() => setOpen(false)}
-                >
-                  Inicio
-                </Link>
-                <Link
-                  href="/menu"
-                  className="type-ui text-lg py-2 text-olive hover:text-blue"
-                  onClick={() => setOpen(false)}
-                >
-                  Menú
-                </Link>
-                <div className="pl-3">
-                  <a
-                    href="/menu#food"
-                    className="type-small text-sm block py-1 text-olive/80 hover:text-blue"
+              Chaska
+            </Link>
+          </div>
+
+          {/* Center: Main nav */}
+          <nav className="hidden md:flex items-center gap-8">
+            <Link
+              href="/"
+              className="type-ui nav-link text-olive hover:text-blue transition-colors"
+            >
+              Inicio
+            </Link>
+            <Link
+              href="/menu"
+              className="type-ui nav-link text-olive hover:text-blue transition-colors"
+            >
+              Menú
+            </Link>
+            <Link
+              href="/events"
+              className="type-ui nav-link text-olive hover:text-blue transition-colors"
+            >
+              Eventos
+            </Link>
+            <Link
+              href="/wine-club"
+              className="type-ui nav-link text-olive hover:text-blue transition-colors"
+            >
+              Club de Vinos
+            </Link>
+          </nav>
+
+          {/* Mobile toggle (right) */}
+          <div className="md:hidden">
+            <button
+              className="p-2 rounded border border-blue/20 text-blue"
+              aria-label={open ? "Cerrar menú" : "Abrir menú"}
+              onClick={() => setOpen(!open)}
+            >
+              <IconHamburger open={open} />
+            </button>
+          </div>
+
+          {/* Right: CTAs */}
+          <div className="hidden sm:flex items-center gap-3">
+            <a
+              href={`tel:${PHONE.replace(/\s/g, "")}`}
+              className="type-ui text-olive hover:text-blue transition-colors"
+            >
+              Llamar
+            </a>
+            <Link
+              href="/events"
+              className="type-ui rounded-full border border-blue/40 text-blue hover:bg-blue hover:text-white transition-colors px-4 py-2"
+            >
+              Reservar
+            </Link>
+          </div>
+        </div>
+
+        {/* Mobile menu: dropdown panel under header, slides down */}
+        <AnimatePresence>
+          {open && (
+            <>
+              {/* Backdrop */}
+              <motion.button
+                aria-label="Cerrar menú"
+                className="md:hidden fixed left-0 right-0 bottom-0 z-[40] bg-foreground/20 backdrop-blur-[1px]"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.2, ease: "easeOut" }}
+                onClick={() => setOpen(false)}
+                style={{ top: headerHeight }}
+              />
+
+              {/* Panel */}
+              <motion.aside
+                className="md:hidden absolute left-0 right-0 top-full z-[45] bg-background shadow-xl overflow-y-auto overscroll-none border-b border-blue/10"
+                role="dialog"
+                aria-modal="true"
+                initial={{ y: -16, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                exit={{ y: -16, opacity: 0 }}
+                transition={{
+                  type: "spring",
+                  stiffness: 420,
+                  damping: 38,
+                  mass: 0.7,
+                }}
+                style={{ height: `calc(100vh - ${headerHeight}px)` }}
+              >
+                <div className="px-4 sm:px-6 py-4 grid gap-2 pb-6">
+                  <Link
+                    href="/"
+                    className="type-ui text-lg py-2 text-olive hover:text-blue"
                     onClick={() => setOpen(false)}
                   >
-                    Comida
-                  </a>
-                  <a
-                    href="/menu#drinks"
-                    className="type-small text-sm block py-1 text-olive/80 hover:text-blue"
+                    Inicio
+                  </Link>
+                  <Link
+                    href="/menu"
+                    className="type-ui text-lg py-2 text-olive hover:text-blue"
                     onClick={() => setOpen(false)}
                   >
-                    Bebidas
+                    Menú
+                  </Link>
+                  <div className="pl-3">
+                    <a
+                      href="/menu#food"
+                      className="type-small text-sm block py-1 text-olive/80 hover:text-blue"
+                      onClick={() => setOpen(false)}
+                    >
+                      Comida
+                    </a>
+                    <a
+                      href="/menu#drinks"
+                      className="type-small text-sm block py-1 text-olive/80 hover:text-blue"
+                      onClick={() => setOpen(false)}
+                    >
+                      Bebidas
+                    </a>
+                  </div>
+                  <Link
+                    href="/events"
+                    className="type-ui text-lg py-2 text-olive hover:text-blue"
+                    onClick={() => setOpen(false)}
+                  >
+                    Eventos
+                  </Link>
+                  <Link
+                    href="/wine-club"
+                    className="type-ui text-lg py-2 text-olive hover:text-blue"
+                    onClick={() => setOpen(false)}
+                  >
+                    Club de Vinos
+                  </Link>
+                  <hr className="my-2 border-blue/10" />
+                  <a
+                    href={`tel:${PHONE.replace(/\s/g, "")}`}
+                    className="type-ui text-lg py-2 text-blue"
+                    onClick={() => setOpen(false)}
+                  >
+                    Llámanos: {PHONE}
                   </a>
+                  <a
+                    href="/#visit"
+                    className="type-ui text-lg py-2 text-olive hover:text-blue"
+                    onClick={() => setOpen(false)}
+                  >
+                    Cómo llegar
+                  </a>
+                  <Link
+                    href="/events"
+                    className="type-ui text-lg py-3 rounded-full text-center bg-blue text-white mt-2"
+                    onClick={() => setOpen(false)}
+                  >
+                    Reservar ahora
+                  </Link>
                 </div>
-                <Link
-                  href="/events"
-                  className="type-ui text-lg py-2 text-olive hover:text-blue"
-                  onClick={() => setOpen(false)}
-                >
-                  Eventos
-                </Link>
-                <Link
-                  href="/wine-club"
-                  className="type-ui text-lg py-2 text-olive hover:text-blue"
-                  onClick={() => setOpen(false)}
-                >
-                  Club de Vinos
-                </Link>
-                <hr className="my-2 border-blue/10" />
-                <a
-                  href={`tel:${PHONE.replace(/\s/g, "")}`}
-                  className="type-ui text-lg py-2 text-blue"
-                  onClick={() => setOpen(false)}
-                >
-                  Llámanos: {PHONE}
-                </a>
-                <a
-                  href="/#visit"
-                  className="type-ui text-lg py-2 text-olive hover:text-blue"
-                  onClick={() => setOpen(false)}
-                >
-                  Cómo llegar
-                </a>
-                <Link
-                  href="/events"
-                  className="type-ui text-lg py-3 rounded-full text-center bg-blue text-white mt-2"
-                  onClick={() => setOpen(false)}
-                >
-                  Reservar ahora
-                </Link>
-              </div>
-            </motion.aside>
-          </>
-        )}
-      </AnimatePresence>
-    </header>
+              </motion.aside>
+            </>
+          )}
+        </AnimatePresence>
+      </header>
+      <div aria-hidden className="w-full" style={{ height: headerHeight }} />
+    </>
   );
 }
 
