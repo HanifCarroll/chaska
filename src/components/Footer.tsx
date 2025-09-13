@@ -3,6 +3,8 @@ import Link from "next/link";
 const PHONE = process.env.NEXT_PUBLIC_PHONE;
 const IG_HANDLE = process.env.NEXT_PUBLIC_IG || "chaska.ba";
 const IG_URL = `https://instagram.com/${IG_HANDLE}`;
+const MAPS_URL =
+  "https://maps.google.com/?q=Concepción%20Arenal%203997%20CABA%20Chacarita";
 
 export default function Footer() {
   return (
@@ -18,31 +20,29 @@ export default function Footer() {
             >
               Chaska
             </Link>
-            <p className="type-small mt-4 text-white/80 max-w-sm">
-              Concepción Arenal 3997, Chacarita — CABA
-            </p>
-            <div className="mt-2">
+            <div className="mt-4">
               <a
-                href="https://maps.google.com/?q=Concepción%20Arenal%203997%20CABA%20Chacarita"
+                href={MAPS_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="type-ui text-white/80 hover:text-gold"
+                className="type-small text-white/80 link-underline hover:text-gold transition-colors inline-block"
               >
-                Cómo llegar
+                Concepción Arenal 3997, Chacarita — CABA
+              </a>
+            </div>
+            <div className="mt-2">
+              <a
+                href={`tel:${PHONE}`}
+                className="type-small text-white/80 link-underline hover:text-gold transition-colors inline-block"
+              >
+                {PHONE}
               </a>
             </div>
           </div>
 
           {/* Contact */}
           <div className="md:text-right space-y-2">
-            <a
-              href={`tel:${PHONE}`}
-              className="type-ui text-white/90 hover:text-gold block"
-            >
-              {PHONE}
-            </a>
             <div className="mt-3">
-              <p className="type-ui text-white/60">Horarios</p>
               <ul className="mt-1 space-y-1 type-small text-white/70">
                 <li className="flex items-center justify-between gap-6">
                   <span>Lunes</span>

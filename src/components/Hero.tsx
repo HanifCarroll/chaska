@@ -11,9 +11,9 @@ export default function Hero() {
 
   return (
     <section className="relative isolate">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 py-16 lg:py-24 grid lg:grid-cols-[1.2fr_1fr] gap-12 lg:gap-16 items-center">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 py-16 lg:py-24 grid lg:grid-cols-2 gap-10 lg:gap-14 items-center">
         {/* Left: Copy */}
-        <div className="max-w-2xl order-2 lg:order-1">
+        <div className="max-w-2xl xl:max-w-xl order-2 lg:order-1">
           <div className="type-small uppercase text-gold tracking-[0.14em] mb-4 flex items-center gap-2">
             <Sunburst className="text-brick w-5 h-5" />
             Chacarita · CABA
@@ -41,14 +41,14 @@ export default function Hero() {
         </div>
 
         {/* Right: Image panel */}
-        <div className="relative order-1 lg:order-2">
-          <div className="rounded-3xl overflow-hidden">
+        <div className="relative order-1 lg:order-2 lg:mr-[-4vw] xl:mr-[-8vw]">
+          <div className="relative w-full aspect-[3/2] lg:h-[460px] xl:h-[560px] rounded-3xl overflow-hidden">
             <Image
               src="/hero.png"
               alt="Milanesas y vino en mesa de restaurante"
-              className="rounded-3xl w-full h-auto"
-              width={1600}
-              height={1067}
+              fill
+              sizes="(min-width: 1024px) 60vw, 100vw"
+              className="object-cover"
               priority
             />
           </div>

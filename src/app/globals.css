@@ -138,6 +138,36 @@ html, body {
     opacity: 0.85;
   }
   .nav-link:hover::after { transform: scaleX(1); }
+
+  /* Underline link with persistent faint base + animated overlay */
+  .link-underline {
+    @apply inline-block;
+    position: relative;
+    padding-bottom: 4px; /* space for underline */
+  }
+  .link-underline::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 1px;
+    background-color: currentColor; /* faint base underline */
+    opacity: 0.35;
+  }
+  .link-underline::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 1px;
+    width: 100%;
+    background-color: currentColor; /* animated overlay */
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 240ms ease-out;
+  }
+  .link-underline:hover::after { transform: scaleX(1); }
 }
 
 /* Base element mapping (safe defaults) */

@@ -18,13 +18,16 @@ export default function Ambiente() {
           </div>
           {/* Overlay copy */}
           <div className="absolute inset-0">
-            <div className="absolute inset-0 bg-gradient-to-t from-black/35 to-transparent" />
+            {/* Stronger bottom scrim for contrast */}
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/55 via-black/10 to-transparent" />
+            {/* Subtle left scrim to help text area */}
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-black/25 to-transparent" />
             <div className="mx-auto max-w-7xl px-4 sm:px-6 h-full flex items-end pb-10">
               <div className="max-w-2xl">
-                <h2 id="ambiente-title" className="type-h2 text-white">
+                <h2 id="ambiente-title" className="type-h2 text-white drop-shadow-md">
                   Más que un restaurante, un lugar para estar.
                 </h2>
-                <p className="type-body text-white/85 mt-3">
+                <p className="type-body text-white/90 mt-3 drop-shadow">
                   Onda canchera, cálida y moderna. Tu punto de encuentro en
                   Chacarita para comer rico, brindar y quedarte charlando.
                 </p>
