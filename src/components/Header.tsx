@@ -1,37 +1,65 @@
 "use client";
 
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { AnimatePresence, motion } from "motion/react";
 
 const PHONE = process.env.NEXT_PUBLIC_PHONE ?? "+34 600 000 000";
 
 export default function Header() {
   const [open, setOpen] = useState(false);
+  const headerRef = useRef<HTMLElement | null>(null);
+  const [headerHeight, setHeaderHeight] = useState(0);
 
-  // Prevent body scrolling when mobile menu is open
+  // Robust body scroll lock while mobile menu is open (handles iOS/Safari)
   useEffect(() => {
-    if (open) {
-      // Store current overflow value
-      const originalOverflow = document.body.style.overflow;
-      // Disable scrolling
-      document.body.style.overflow = "hidden";
+    if (!open) return;
 
-      // Cleanup function to restore scrolling
-      return () => {
-        document.body.style.overflow = originalOverflow;
-      };
-    }
+    const bodyStyle = document.body.style;
+    const original = {
+      position: bodyStyle.position,
+      top: bodyStyle.top,
+      overflow: bodyStyle.overflow,
+      width: bodyStyle.width,
+    };
+    const scrollY = window.scrollY;
+
+    bodyStyle.position = "fixed";
+    bodyStyle.top = `-${scrollY}px`;
+    bodyStyle.overflow = "hidden";
+    bodyStyle.width = "100%";
+
+    return () => {
+      bodyStyle.position = original.position;
+      bodyStyle.top = original.top;
+      bodyStyle.overflow = original.overflow;
+      bodyStyle.width = original.width;
+      window.scrollTo(0, scrollY);
+    };
   }, [open]);
 
+  // Measure header height to avoid dimming it and size the panel correctly
+  useEffect(() => {
+    const measure = () => {
+      const h = headerRef.current?.offsetHeight ?? 0;
+      setHeaderHeight(h);
+    };
+    measure();
+    window.addEventListener("resize", measure);
+    return () => window.removeEventListener("resize", measure);
+  }, []);
+
   return (
-    <header className="sticky top-0 z-50 bg-background/90 backdrop-blur border-b border-blue/10">
+    <header
+      ref={headerRef}
+      className="sticky top-0 z-50 bg-background/90 backdrop-blur border-b border-blue/10"
+    >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 py-4 flex items-center justify-between gap-4">
         {/* Left: Brand */}
         <div className="flex items-center gap-6">
           <Link
             href="/"
-            className="font-script font-bold text-blue text-3xl md:text-4xl"
+            className="font-script font-bold text-blue text-4xl md:text-5xl"
             aria-label="Inicio de Chaska"
           >
             Chaska
@@ -94,64 +122,49 @@ export default function Header() {
         </div>
       </div>
 
-      {/* Mobile menu: overlay slide-in from right */}
+      {/* Mobile menu: dropdown panel under header, slides down */}
       <AnimatePresence>
         {open && (
           <>
             {/* Backdrop */}
             <motion.button
               aria-label="Cerrar menú"
-              className="md:hidden fixed inset-0 z-[40] bg-foreground/20 backdrop-blur-[1px]"
+              className="md:hidden fixed left-0 right-0 bottom-0 z-[40] bg-foreground/20 backdrop-blur-[1px]"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.2, ease: "easeOut" }}
               onClick={() => setOpen(false)}
+              style={{ top: headerHeight }}
             />
 
             {/* Panel */}
             <motion.aside
-              className="md:hidden fixed inset-0 z-[70] h-screen w-full bg-background shadow-xl overflow-y-auto overscroll-none"
+              className="md:hidden absolute left-0 right-0 top-full z-[45] bg-background shadow-xl overflow-y-auto overscroll-none border-b border-blue/10"
               role="dialog"
               aria-modal="true"
-              initial={{ x: "100%" }}
-              animate={{ x: 0 }}
-              exit={{ x: "100%" }}
+              initial={{ y: -16, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              exit={{ y: -16, opacity: 0 }}
               transition={{
                 type: "spring",
                 stiffness: 420,
                 damping: 38,
                 mass: 0.7,
               }}
+              style={{ height: `calc(100vh - ${headerHeight}px)` }}
             >
-              <div className="px-4 sm:px-6 py-4 flex items-center justify-between border-b border-blue/10">
+              <div className="px-4 sm:px-6 py-4 grid gap-2 pb-6">
                 <Link
                   href="/"
-                  className="font-script font-bold text-blue text-2xl"
-                  onClick={() => setOpen(false)}
-                >
-                  Chaska
-                </Link>
-                <button
-                  className="p-2 rounded border border-blue/20 text-blue"
-                  aria-label="Cerrar menú"
-                  onClick={() => setOpen(false)}
-                >
-                  <IconX />
-                </button>
-              </div>
-
-              <div className="px-4 sm:px-6 py-4 grid gap-2">
-                <Link
-                  href="/"
-                  className="type-ui py-2 text-olive hover:text-blue"
+                  className="type-ui text-lg py-2 text-olive hover:text-blue"
                   onClick={() => setOpen(false)}
                 >
                   Inicio
                 </Link>
                 <Link
                   href="/menu"
-                  className="type-ui py-2 text-olive hover:text-blue"
+                  className="type-ui text-lg py-2 text-olive hover:text-blue"
                   onClick={() => setOpen(false)}
                 >
                   Menú
@@ -159,14 +172,14 @@ export default function Header() {
                 <div className="pl-3">
                   <a
                     href="/menu#food"
-                    className="type-small block py-1 text-olive/80 hover:text-blue"
+                    className="type-small text-sm block py-1 text-olive/80 hover:text-blue"
                     onClick={() => setOpen(false)}
                   >
                     Comida
                   </a>
                   <a
                     href="/menu#drinks"
-                    className="type-small block py-1 text-olive/80 hover:text-blue"
+                    className="type-small text-sm block py-1 text-olive/80 hover:text-blue"
                     onClick={() => setOpen(false)}
                   >
                     Bebidas
@@ -174,14 +187,14 @@ export default function Header() {
                 </div>
                 <Link
                   href="/events"
-                  className="type-ui py-2 text-olive hover:text-blue"
+                  className="type-ui text-lg py-2 text-olive hover:text-blue"
                   onClick={() => setOpen(false)}
                 >
                   Eventos
                 </Link>
                 <Link
                   href="/wine-club"
-                  className="type-ui py-2 text-olive hover:text-blue"
+                  className="type-ui text-lg py-2 text-olive hover:text-blue"
                   onClick={() => setOpen(false)}
                 >
                   Club de Vinos
@@ -189,21 +202,21 @@ export default function Header() {
                 <hr className="my-2 border-blue/10" />
                 <a
                   href={`tel:${PHONE.replace(/\s/g, "")}`}
-                  className="type-ui py-2 text-blue"
+                  className="type-ui text-lg py-2 text-blue"
                   onClick={() => setOpen(false)}
                 >
                   Llámanos: {PHONE}
                 </a>
                 <a
                   href="/#visit"
-                  className="type-ui py-2 text-olive hover:text-blue"
+                  className="type-ui text-lg py-2 text-olive hover:text-blue"
                   onClick={() => setOpen(false)}
                 >
                   Cómo llegar
                 </a>
                 <Link
                   href="/events"
-                  className="type-ui py-2 rounded-full text-center bg-blue text-white mt-2"
+                  className="type-ui text-lg py-3 rounded-full text-center bg-blue text-white mt-2"
                   onClick={() => setOpen(false)}
                 >
                   Reservar ahora
