@@ -45,6 +45,11 @@ body {
   font-family: var(--font-sans);
 }
 
+/* Prevent horizontal scroll caused by off-canvas transforms */
+html, body {
+  overflow-x: hidden;
+}
+
 /* Typography scale and utilities */
 @layer components {
   /* H1 – Hero Headline */
@@ -112,6 +117,27 @@ body {
     transition: transform 280ms ease-out;
   }
   .link-cta:hover::after { transform: scaleX(1); }
+
+  /* Header nav links with subtle hover underline */
+  .nav-link {
+    @apply inline-block;
+    position: relative;
+    padding-bottom: 4px; /* reserve space for underline */
+  }
+  .nav-link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 2px;
+    width: 100%;
+    background-color: currentColor;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 220ms ease-out;
+    opacity: 0.85;
+  }
+  .nav-link:hover::after { transform: scaleX(1); }
 }
 
 /* Base element mapping (safe defaults) */
