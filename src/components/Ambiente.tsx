@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function Ambiente() {
   return (
-    <section aria-labelledby="ambiente-title" className="relative isolate">
+    <section aria-labelledby="ambiente-title" className="relative isolate hidden md:block">
       <div className="mx-auto max-w-none">
         <div className="relative">
           {/* Full-width image */}

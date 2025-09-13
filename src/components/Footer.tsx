@@ -93,7 +93,7 @@ export default function Footer() {
           </div>
         </nav>
 
-        <div className="mt-10 md:mt-12 border-t border-white/10 pt-6 flex flex-col md:flex-row items-center justify-between gap-4">
+        <div className="mt-10 md:mt-12 border-t border-white/10 pt-6 flex flex-col items-start gap-2 md:flex-row md:items-center md:justify-between md:gap-4">
           <p className="type-small text-white/60">
             © {new Date().getFullYear()} Chaska
           </p>
