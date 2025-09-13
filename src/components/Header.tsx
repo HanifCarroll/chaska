@@ -116,7 +116,7 @@ export default function Header() {
             </a>
             <Link
               href="/events"
-              className="type-ui rounded-full border border-blue/40 text-blue hover:bg-blue hover:text-white transition-colors px-4 py-2"
+              className="type-ui rounded-full bg-blue text-background hover:bg-blue/90 transition-colors px-4 py-2"
             >
               Reservar
             </Link>
@@ -217,7 +217,7 @@ export default function Header() {
                   </a>
                   <Link
                     href="/events"
-                    className="type-ui text-lg py-3 rounded-full text-center bg-blue text-white mt-2"
+                    className="type-ui text-lg py-3 rounded-full text-center bg-blue text-background mt-2 hover:bg-blue/90"
                     onClick={() => setOpen(false)}
                   >
                     Reservar ahora

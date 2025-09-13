@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 const PHONE = process.env.NEXT_PUBLIC_PHONE;
-const IG_HANDLE = process.env.NEXT_PUBLIC_INSTAGRAM;
+const IG_HANDLE = process.env.NEXT_PUBLIC_IG || "chaska.ba";
 const IG_URL = `https://instagram.com/${IG_HANDLE}`;
 
 export default function Footer() {
