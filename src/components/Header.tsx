@@ -1,13 +1,28 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { AnimatePresence, motion } from "motion/react";
 
 const PHONE = process.env.NEXT_PUBLIC_PHONE ?? "+34 600 000 000";
 
 export default function Header() {
   const [open, setOpen] = useState(false);
+
+  // Prevent body scrolling when mobile menu is open
+  useEffect(() => {
+    if (open) {
+      // Store current overflow value
+      const originalOverflow = document.body.style.overflow;
+      // Disable scrolling
+      document.body.style.overflow = "hidden";
+
+      // Cleanup function to restore scrolling
+      return () => {
+        document.body.style.overflow = originalOverflow;
+      };
+    }
+  }, [open]);
 
   return (
     <header className="sticky top-0 z-50 bg-background/90 backdrop-blur border-b border-blue/10">
