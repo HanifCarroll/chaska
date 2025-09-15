@@ -10,16 +10,16 @@ export const menuPageQuery = groq`
       title,
       description,
       footnote,
-      items[coalesce(available, true) == true]{
+      items[]{
         _key,
         name,
         description,
+        ingredients,
         price,
-        dietaryTags,
-        variants[]{
-          _key,
-          label,
-          price
+        photo{
+          asset->{
+            url
+          }
         }
       }
     },
@@ -28,35 +28,44 @@ export const menuPageQuery = groq`
       title,
       description,
       footnote,
-      items[coalesce(available, true) == true]{
+      items[]{
         _key,
         name,
         description,
+        ingredients,
         price,
-        dietaryTags,
-        variants[]{
-          _key,
-          label,
-          price
+        photo{
+          asset->{
+            url
+          }
         }
       }
     }
   }
 `;
 
-export type MenuVariant = {
-  _key?: string;
-  label: string;
-  price: string;
-};
+export const eventsQuery = groq`
+  *[_type == "event"] | order(startDate asc) {
+    _id,
+    title,
+    slug,
+    startDate,
+    endDate,
+    summary
+  }
+`;
 
 export type MenuItem = {
   _key?: string;
   name: string;
   description?: string;
-  price?: string;
-  dietaryTags?: string[];
-  variants?: MenuVariant[];
+  ingredients?: string[];
+  price: string;
+  photo?: {
+    asset?: {
+      url?: string;
+    };
+  };
 };
 
 export type MenuSection = {
@@ -74,3 +83,16 @@ export type MenuPagePayload = {
   foodSections?: MenuSection[];
   drinkSections?: MenuSection[];
 };
+
+export type EventRecord = {
+  _id: string;
+  title: string;
+  slug?: {
+    current?: string;
+  };
+  startDate?: string;
+  endDate?: string;
+  summary?: string;
+};
+
+export type EventsPayload = EventRecord[];

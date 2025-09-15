@@ -10,6 +10,8 @@
     "format": "biome format --write"
   },
   "dependencies": {
+    "@sanity/client": "^6.24.2",
+    "dotenv": "^16.4.5",
     "@sanity/types": "^4.8.1",
     "@sanity/vision": "^4.8.1",
     "groq": "^4.8.1",

@@ -1,13 +1,5 @@
 import { defineArrayMember, defineField, defineType } from "sanity";
 
-const dietaryTagOptions = [
-  { title: "Vegetarian", value: "vegetarian" },
-  { title: "Vegan", value: "vegan" },
-  { title: "Gluten Free", value: "gluten-free" },
-  { title: "Spicy", value: "spicy" },
-  { title: "Seasonal", value: "seasonal" },
-];
-
 export default defineType({
   name: "menuItem",
   title: "Menu Item",
@@ -24,69 +16,47 @@ export default defineType({
       title: "Description",
       type: "text",
       rows: 3,
-      description: "Short supporting copy shown under the name.",
+      description: "Optional short copy shown under the name.",
+    }),
+    defineField({
+      name: "ingredients",
+      title: "Ingredients",
+      type: "array",
+      of: [
+        defineArrayMember({
+          type: "string",
+        }),
+      ],
+      description: "Optional. Use for a list of highlighted ingredients.",
     }),
     defineField({
       name: "price",
       title: "Price",
       type: "string",
-      description: "Leave empty if this item uses variants below.",
+      validation: (rule) => rule.required().error("Add a price."),
     }),
     defineField({
-      name: "variants",
-      title: "Variants",
-      type: "array",
-      of: [defineArrayMember({ type: "menuVariant" })],
-      description:
-        "Optional. Use for multiple sizes or pours (e.g. cocktails, wine).",
-    }),
-    defineField({
-      name: "dietaryTags",
-      title: "Dietary Tags",
-      type: "array",
-      of: [
-        defineArrayMember({
-          type: "string",
-          options: {
-            list: dietaryTagOptions,
-          },
-        }),
-      ],
+      name: "photo",
+      title: "Photo",
+      type: "image",
       options: {
-        layout: "tags",
+        hotspot: true,
       },
-    }),
-    defineField({
-      name: "available",
-      title: "Currently Available",
-      type: "boolean",
-      initialValue: true,
-      description: "Uncheck to temporarily hide the item from the menu.",
+      description: "Optional photo shown alongside the description.",
     }),
   ],
   preview: {
     select: {
       title: "name",
       subtitle: "price",
-      available: "available",
+      media: "photo",
     },
-    prepare({ title, subtitle, available }) {
+    prepare({ title, subtitle, media }) {
       return {
         title,
-        subtitle:
-          available === false && subtitle ? `${subtitle} (hidden)` : subtitle,
+        subtitle,
+        media,
       };
     },
   },
-  validation: (rule) =>
-    rule.custom((value) => {
-      if (!value) return true;
-      const hasPrice = Boolean(value.price);
-      const hasVariants =
-        Array.isArray(value.variants) && value.variants.length > 0;
-      if (!hasPrice && !hasVariants) {
-        return "Add a price or at least one variant.";
-      }
-      return true;
-    }),
 });

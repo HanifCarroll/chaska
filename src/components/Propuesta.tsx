@@ -40,7 +40,7 @@ export default function Propuesta() {
         </header>
 
         <div className="mt-8 grid gap-8 sm:gap-10 md:grid-cols-3">
-          {items.map((it) => (
+          {items.map((it, i) => (
             <article key={it.title} className="grid gap-3">
               <div className="relative w-full aspect-[4/3] overflow-hidden rounded-2xl border border-foreground/10">
                 <Image

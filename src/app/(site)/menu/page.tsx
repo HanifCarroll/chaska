@@ -1,6 +1,11 @@
 import { client } from "@sanity/lib/client";
-import type { MenuPagePayload, MenuSection } from "@sanity/lib/queries";
+import type {
+  MenuItem,
+  MenuPagePayload,
+  MenuSection,
+} from "@sanity/lib/queries";
 import { menuPageQuery } from "@sanity/lib/queries";
+import Image from "next/image";
 
 export const metadata = { title: "Menú — Chaska" };
 export const revalidate = 60;
@@ -52,44 +57,51 @@ type MenuSectionListProps = {
 
 function MenuSectionList({ id, title, sections }: MenuSectionListProps) {
   return (
-    <section id={id} className="space-y-8">
-      <header>
-        <h2 className="text-blue">{title}</h2>
-      </header>
+    <section
+      id={id}
+      className="space-y-20"
+      aria-labelledby={title ? `${id}-title` : undefined}
+    >
+      {title ? (
+        <h2 id={`${id}-title`} className="sr-only">
+          {title}
+        </h2>
+      ) : null}
 
-      <div className="space-y-10">
-        {sections.map((section) => (
-          <article key={section._key ?? section.title} className="space-y-4">
-            <header className="space-y-2">
-              <h3 className="type-h3 text-blue">{section.title}</h3>
+      <div className="space-y-24">
+        {sections.map((section, sectionIndex) => (
+          <article
+            key={section._key ?? section.title}
+            className={`space-y-8 ${sectionIndex === 0 ? "" : "border-t border-olive/25 pt-14"}`}
+          >
+            <header className="space-y-3">
+              <h3 className="font-sans text-[30px] md:text-[34px] font-bold tracking-tight text-blue">
+                {section.title}
+              </h3>
               {section.description ? (
-                <p className="type-body text-olive/85">{section.description}</p>
+                <div className="space-y-4">
+                  <p className="type-body text-olive/80 leading-relaxed max-w-2xl">
+                    {section.description}
+                  </p>
+                  <div className="h-px w-full max-w-2xl bg-blue/25" />
+                </div>
               ) : null}
             </header>
 
-            <ul className="space-y-6">
-              {section.items?.map((item) => (
-                <li key={item._key ?? item.name} className="space-y-2">
-                  <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between">
-                    <h4 className="type-h4 text-blue">{item.name}</h4>
-                    <PriceDisplay price={item.price} variants={item.variants} />
-                  </div>
-                  {item.description ? (
-                    <p className="type-body text-olive/85">
-                      {item.description}
-                    </p>
-                  ) : null}
-                  {item.dietaryTags?.length ? (
-                    <p className="type-small uppercase tracking-wide text-olive/70">
-                      {item.dietaryTags.join(" • ")}
-                    </p>
-                  ) : null}
-                </li>
+            <div className="flex flex-col gap-10">
+              {section.items?.map((item, itemIndex) => (
+                <MenuItemDisplay
+                  key={item._key ?? item.name}
+                  item={item}
+                  isFirst={itemIndex === 0}
+                />
               ))}
-            </ul>
+            </div>
 
             {section.footnote ? (
-              <p className="type-small text-olive/70">{section.footnote}</p>
+              <p className="type-small text-olive/60 pt-4">
+                {section.footnote}
+              </p>
             ) : null}
           </article>
         ))}
@@ -98,31 +110,58 @@ function MenuSectionList({ id, title, sections }: MenuSectionListProps) {
   );
 }
 
-type PriceDisplayProps = {
-  price?: string;
-  variants?: MenuSection["items"][number]["variants"];
+type MenuItemDisplayProps = {
+  item: MenuItem;
+  isFirst?: boolean;
 };
 
-function PriceDisplay({ price, variants }: PriceDisplayProps) {
-  if (variants && variants.length > 0) {
-    return (
-      <dl className="grid gap-2">
-        {variants.map((variant) => (
-          <div
-            key={variant._key ?? variant.label}
-            className="flex flex-col gap-0.5 text-right sm:flex-row sm:items-baseline sm:justify-end sm:gap-3"
-          >
-            <dt className="type-small text-olive/70">{variant.label}</dt>
-            <dd className="type-body text-blue">{variant.price}</dd>
+function MenuItemDisplay({ item, isFirst = false }: MenuItemDisplayProps) {
+  const photoUrl = item.photo?.asset?.url;
+  const ingredients = item.ingredients?.filter((ingredient) => ingredient);
+
+  return (
+    <article
+      className={`grid gap-6 lg:grid-cols-[minmax(0,3fr)_minmax(0,1fr)] lg:gap-12 ${
+        isFirst ? "" : "border-t border-olive/20 pt-8"
+      }`}
+    >
+      <div className="space-y-4">
+        <h4 className="font-display text-[22px] md:text-[24px] leading-tight text-blue">
+          {item.name}
+        </h4>
+
+        {item.description ? (
+          <p className="type-body text-olive/85 leading-relaxed">
+            {item.description}
+          </p>
+        ) : null}
+
+        {ingredients && ingredients.length > 0 ? (
+          <p className="type-small uppercase tracking-[0.08em] text-olive/60">
+            {ingredients.join(" • ")}
+          </p>
+        ) : null}
+
+        {photoUrl ? (
+          <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl shadow-sm">
+            <Image
+              src={photoUrl}
+              alt={item.name}
+              fill
+              sizes="(min-width: 1280px) 420px, (min-width: 768px) 360px, 100vw"
+              className="object-cover"
+            />
           </div>
-        ))}
-      </dl>
-    );
-  }
+        ) : null}
+      </div>
 
-  if (price) {
-    return <p className="type-body text-blue">{price}</p>;
-  }
-
-  return null;
+      <div className="flex items-start justify-end">
+        {item.price ? (
+          <p className="font-sans text-[18px] md:text-[20px] font-medium text-blue/90">
+            {item.price}
+          </p>
+        ) : null}
+      </div>
+    </article>
+  );
 }
