@@ -1,8 +1,8 @@
-import Hero from "@/components/Hero";
-import Propuesta from "@/components/Propuesta";
 import Ambiente from "@/components/Ambiente";
-import WineClubHighlight from "@/components/WineClubHighlight";
+import Hero from "@/components/Hero";
 import InstagramGrid from "@/components/InstagramGrid";
+import Propuesta from "@/components/Propuesta";
+import WineClubHighlight from "@/components/WineClubHighlight";
 
 export default function Home() {
   return (

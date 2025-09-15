@@ -1,3 +1,4 @@
+import Image from "next/image";
 import JoinForm from "@/components/JoinForm";
 
 export const metadata = { title: "Club de Vinos — Chaska" };
@@ -8,10 +9,13 @@ export default function WineClubPage() {
       {/* Section 1: Hero */}
       <section aria-labelledby="club-hero-title" className="relative isolate">
         {/* Hero image (PNG provided by user) */}
-        <img
+        <Image
           src="/wine-club-hero.png"
           alt="Primer plano cinematográfico de vino sirviéndose en copa"
-          className="absolute inset-0 h-full w-full object-cover"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover"
         />
         {/* overlay */}
         <div className="absolute inset-0 bg-black/40" />
@@ -53,7 +57,10 @@ export default function WineClubPage() {
                 fill="none"
                 stroke="currentColor"
                 className="text-gold"
+                aria-hidden="true"
+                focusable="false"
               >
+                <title>Calendario del club</title>
                 <rect
                   x="3"
                   y="4"
@@ -88,7 +95,10 @@ export default function WineClubPage() {
                 fill="none"
                 stroke="currentColor"
                 className="text-gold"
+                aria-hidden="true"
+                focusable="false"
               >
+                <title>Botella destacada</title>
                 <path
                   d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
                   strokeWidth="1.2"
@@ -115,7 +125,10 @@ export default function WineClubPage() {
                 fill="none"
                 stroke="currentColor"
                 className="text-gold"
+                aria-hidden="true"
+                focusable="false"
               >
+                <title>Bolsa de regalo</title>
                 <rect
                   x="3"
                   y="8"
@@ -151,9 +164,11 @@ export default function WineClubPage() {
         </h2>
         <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
           <div>
-            <img
+            <Image
               src="/wine-club-selection.png"
               alt="Selección actual de botellas del mes con copa y maridajes"
+              width={800}
+              height={600}
               className="w-full h-auto rounded-xl shadow-sm ring-1 ring-black/5"
             />
           </div>
@@ -200,7 +215,10 @@ export default function WineClubPage() {
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"
+                    aria-hidden="true"
+                    focusable="false"
                   >
+                    <title>Entrada a eventos exclusivos</title>
                     <path
                       d="M3 7h18v4a2 2 0 010 4v4H3v-4a2 2 0 010-4V7z"
                       strokeWidth="1.5"
@@ -232,7 +250,10 @@ export default function WineClubPage() {
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"
+                    aria-hidden="true"
+                    focusable="false"
                   >
+                    <title>Etiqueta con descuento</title>
                     <path
                       d="M20.59 13.41L13.41 20.59a2 2 0 01-2.83 0L3 13v-2.59L10.59 3H13l7.59 7.59a2 2 0 010 2.82z"
                       strokeWidth="1.5"
@@ -264,7 +285,10 @@ export default function WineClubPage() {
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"
+                    aria-hidden="true"
+                    focusable="false"
                   >
+                    <title>Regalos para socios</title>
                     <rect
                       x="3"
                       y="8"
@@ -293,10 +317,12 @@ export default function WineClubPage() {
 
           <div className="relative lg:mr-[-4vw] xl:mr-[-8vw]">
             <div className="relative w-full aspect-[4/3] lg:h-[420px] xl:h-[540px] rounded-3xl overflow-hidden shadow-sm ring-1 ring-black/5">
-              <img
+              <Image
                 src="/wine-club-benefits.png"
                 alt="Cata de vinos y momentos compartidos, imagen ilustrativa"
-                className="absolute inset-0 w-full h-full object-cover"
+                fill
+                sizes="(min-width: 1024px) 50vw, 100vw"
+                className="object-cover"
               />
             </div>
           </div>

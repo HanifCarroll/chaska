@@ -9,7 +9,10 @@ export default function JoinForm() {
   };
 
   return (
-    <form className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-4 text-left" onSubmit={handleSubmit}>
+    <form
+      className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-4 text-left"
+      onSubmit={handleSubmit}
+    >
       <div className="flex flex-col">
         <label htmlFor="name" className="type-small text-white/85 mb-1">
           Nombre
@@ -49,7 +52,9 @@ export default function JoinForm() {
         />
       </div>
       <div className="md:col-span-3 flex justify-center">
-        <button type="submit" className="btn btn-contrast px-8">Suscribirme</button>
+        <button type="submit" className="btn btn-contrast px-8">
+          Suscribirme
+        </button>
       </div>
     </form>
   );

@@ -6,10 +6,10 @@
   --foreground: #1f2937; /* slate-800 */
 
   /* Palette (muted) */
-  --blue: #2f4a63;      /* deep muted blue */
-  --olive: #3f4b3a;     /* dark olive green */
-  --brick: #a44335;     /* brick red */
-  --gold: #c4a25b;      /* muted gold */
+  --blue: #2f4a63; /* deep muted blue */
+  --olive: #3f4b3a; /* dark olive green */
+  --brick: #a44335; /* brick red */
+  --gold: #c4a25b; /* muted gold */
   --white: #ffffff;
 }
 
@@ -21,10 +21,14 @@
   --color-brick: var(--brick);
   --color-gold: var(--gold);
   --color-white: var(--white);
-  --font-display: var(--font-gloock), ui-serif, Georgia, "Times New Roman", serif;
+  --font-display:
+    var(--font-gloock), ui-serif, Georgia, "Times New Roman", serif;
   --font-script: var(--font-dancing), cursive;
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  --font-mono: var(--font-plex-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  --font-sans:
+    var(--font-inter), ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-mono:
+    var(--font-plex-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -46,17 +50,22 @@ body {
 }
 
 /* Prevent horizontal scroll caused by off-canvas transforms */
-html, body {
+html,
+body {
   overflow-x: hidden;
 }
 
 /* Smooth scrolling for in-page anchors, respecting reduced-motion */
 @media (prefers-reduced-motion: no-preference) {
-  html { scroll-behavior: smooth; }
+  html {
+    scroll-behavior: smooth;
+  }
 }
 
 /* Helpful offset so anchored targets aren't hidden behind fixed header */
-[id] { scroll-margin-top: 88px; }
+[id] {
+  scroll-margin-top: 88px;
+}
 
 /* Typography scale and utilities */
 @layer components {
@@ -124,7 +133,9 @@ html, body {
     transform-origin: left;
     transition: transform 280ms ease-out;
   }
-  .link-cta:hover::after { transform: scaleX(1); }
+  .link-cta:hover::after {
+    transform: scaleX(1);
+  }
 
   /* Header nav links with subtle hover underline */
   .nav-link {
@@ -145,7 +156,9 @@ html, body {
     transition: transform 220ms ease-out;
     opacity: 0.85;
   }
-  .nav-link:hover::after { transform: scaleX(1); }
+  .nav-link:hover::after {
+    transform: scaleX(1);
+  }
 
   /* Underline link with persistent faint base + animated overlay */
   .link-underline {
@@ -175,7 +188,9 @@ html, body {
     transform-origin: left;
     transition: transform 240ms ease-out;
   }
-  .link-underline:hover::after { transform: scaleX(1); }
+  .link-underline:hover::after {
+    transform: scaleX(1);
+  }
 
   /* Buttons */
   .btn {
@@ -198,10 +213,18 @@ html, body {
 
 /* Base element mapping (safe defaults) */
 @layer base {
-  h1 { @apply font-display font-bold text-[48px] md:text-[64px] leading-[110%] tracking-[-0.01em]; }
-  h2 { @apply font-display font-semibold text-[32px] md:text-[40px] leading-[120%] tracking-[-0.005em]; }
-  h3 { @apply font-display font-medium text-[24px] md:text-[28px] leading-[130%] tracking-normal; }
-  p { @apply font-sans font-normal text-[16px] md:text-[18px] leading-[150%] tracking-normal; }
+  h1 {
+    @apply font-display font-bold text-[48px] md:text-[64px] leading-[110%] tracking-[-0.01em];
+  }
+  h2 {
+    @apply font-display font-semibold text-[32px] md:text-[40px] leading-[120%] tracking-[-0.005em];
+  }
+  h3 {
+    @apply font-display font-medium text-[24px] md:text-[28px] leading-[130%] tracking-normal;
+  }
+  p {
+    @apply font-sans font-normal text-[16px] md:text-[18px] leading-[150%] tracking-normal;
+  }
 }
 
 /* Define custom utilities using Tailwind v4 @utility */

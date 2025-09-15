@@ -2,7 +2,10 @@ import Image from "next/image";
 
 export default function Ambiente() {
   return (
-    <section aria-labelledby="ambiente-title" className="relative isolate hidden md:block">
+    <section
+      aria-labelledby="ambiente-title"
+      className="relative isolate hidden md:block"
+    >
       <div className="mx-auto max-w-none">
         <div className="relative">
           {/* Full-width image */}
@@ -24,7 +27,10 @@ export default function Ambiente() {
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-black/25 to-transparent" />
             <div className="mx-auto max-w-7xl px-4 sm:px-6 h-full flex items-end pb-10">
               <div className="max-w-2xl">
-                <h2 id="ambiente-title" className="type-h2 text-white drop-shadow-md">
+                <h2
+                  id="ambiente-title"
+                  className="type-h2 text-white drop-shadow-md"
+                >
                   Más que un restaurante, un lugar para estar.
                 </h2>
                 <p className="type-body text-white/90 mt-3 drop-shadow">

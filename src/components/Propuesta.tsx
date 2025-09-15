@@ -1,7 +1,12 @@
 import Image from "next/image";
 
 export default function Propuesta() {
-  const items: Array<{ title: string; desc: string; src: string; alt: string }> = [
+  const items: Array<{
+    title: string;
+    desc: string;
+    src: string;
+    alt: string;
+  }> = [
     {
       title: "Tacos de Mochella",
       desc: "Una fusión inesperada que tenés que probar.",
@@ -35,8 +40,8 @@ export default function Propuesta() {
         </header>
 
         <div className="mt-8 grid gap-8 sm:gap-10 md:grid-cols-3">
-          {items.map((it, i) => (
-            <article key={i} className="grid gap-3">
+          {items.map((it) => (
+            <article key={it.title} className="grid gap-3">
               <div className="relative w-full aspect-[4/3] overflow-hidden rounded-2xl border border-foreground/10">
                 <Image
                   src={it.src}

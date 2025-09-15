@@ -9,9 +9,19 @@ export default function InstagramGrid() {
     <section aria-labelledby="instagram-title" className="relative isolate">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 py-14 lg:py-20">
         <header className="max-w-2xl">
-          <h2 id="instagram-title" className="type-h2 text-blue">La Onda en Instagram</h2>
+          <h2 id="instagram-title" className="type-h2 text-blue">
+            La Onda en Instagram
+          </h2>
           <p className="type-body text-olive/90 mt-2">
-            Seguinos en <a className="underline decoration-blue/30 underline-offset-4 hover:decoration-blue" target="_blank" rel="noopener noreferrer" href={IG_URL}>@{IG_HANDLE}</a>
+            Seguinos en{" "}
+            <a
+              className="underline decoration-blue/30 underline-offset-4 hover:decoration-blue"
+              target="_blank"
+              rel="noopener noreferrer"
+              href={IG_URL}
+            >
+              @{IG_HANDLE}
+            </a>
           </p>
         </header>
 

@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
-import { Inter, IBM_Plex_Mono, Gloock, Dancing_Script } from "next/font/google";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+import { Dancing_Script, Gloock, IBM_Plex_Mono, Inter } from "next/font/google";
+import type { ReactNode } from "react";
 import "./globals.css";
 
 // Fonts
@@ -42,16 +41,14 @@ export const metadata: Metadata = {
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: ReactNode;
 }>) {
   return (
     <html lang="es">
       <body
         className={`${inter.variable} ${plexMono.variable} ${gloock.variable} ${dancing.variable} antialiased`}
       >
-        <Header />
         {children}
-        <Footer />
       </body>
     </html>
   );

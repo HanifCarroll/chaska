@@ -1,5 +1,5 @@
-import Link from "next/link";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Hero() {
   const lines = [
@@ -19,8 +19,8 @@ export default function Hero() {
             Chacarita · CABA
           </div>
           <h1 className="type-hero text-blue">
-            {lines.map((t, i) => (
-              <span key={i} className="block">
+            {lines.map((t) => (
+              <span key={t} className="block">
                 {t}
               </span>
             ))}
@@ -66,12 +66,13 @@ function Sunburst({ className = "" }: { className?: string }) {
       fill="none"
       stroke="currentColor"
       strokeWidth="1.5"
+      aria-hidden="true"
+      focusable="false"
     >
+      <title>Sunburst divider</title>
       <path d="M3 13h18" />
       <path d="M5 13a7 7 0 0 1 14 0" fill="currentColor" stroke="none" />
       <path d="M12 3v5M6 6l3 4M18 6l-3 4" />
     </svg>
   );
 }
-
-// DecorativePanel removed and replaced with a responsive image in the panel above.

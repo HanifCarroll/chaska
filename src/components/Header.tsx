@@ -1,8 +1,8 @@
 "use client";
 
-import Link from "next/link";
-import { useState, useEffect, useRef } from "react";
 import { AnimatePresence, motion } from "motion/react";
+import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
 
 const PHONE = process.env.NEXT_PUBLIC_PHONE ?? "+34 600 000 000";
 
@@ -101,6 +101,7 @@ export default function Header() {
               className="p-2 rounded border border-blue/20 text-blue"
               aria-label={open ? "Cerrar menú" : "Abrir menú"}
               onClick={() => setOpen(!open)}
+              type="button"
             >
               <IconHamburger open={open} />
             </button>
@@ -168,20 +169,20 @@ export default function Header() {
                     Menú
                   </Link>
                   <div className="pl-3">
-                    <a
+                    <Link
                       href="/menu#food"
                       className="type-small text-sm block py-1 text-olive/80 hover:text-blue"
                       onClick={() => setOpen(false)}
                     >
                       Comida
-                    </a>
-                    <a
+                    </Link>
+                    <Link
                       href="/menu#drinks"
                       className="type-small text-sm block py-1 text-olive/80 hover:text-blue"
                       onClick={() => setOpen(false)}
                     >
                       Bebidas
-                    </a>
+                    </Link>
                   </div>
                   <Link
                     href="/events"
@@ -205,13 +206,13 @@ export default function Header() {
                   >
                     Llámanos: {PHONE}
                   </a>
-                  <a
+                  <Link
                     href="/#visit"
                     className="type-ui text-lg py-2 text-olive hover:text-blue"
                     onClick={() => setOpen(false)}
                   >
                     Cómo llegar
-                  </a>
+                  </Link>
                   <Link
                     href="/events"
                     className="btn btn-primary w-full mt-2"
