@@ -235,3 +235,15 @@ body {
 @utility font-script {
   font-family: var(--font-script);
 }
+
+/* Sanity Studio adjustments */
+@layer components {
+  .sanity-studio-wrapper {
+    min-height: 100vh;
+    background-color: #ffffff;
+  }
+
+  .sanity-studio-wrapper [data-ui="PortalProvider"] {
+    min-height: 100vh;
+  }
+}

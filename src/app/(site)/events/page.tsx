@@ -32,9 +32,12 @@ export default async function EventsPage() {
         </p>
       </header>
 
-      <section className="space-y-6">
-        <header>
-          <h2 className="text-blue">Agenda</h2>
+      <section className="space-y-10">
+        <header className="space-y-4">
+          <h2 className="font-sans text-[30px] md:text-[34px] font-bold tracking-tight text-blue">
+            Agenda
+          </h2>
+          <div className="h-px w-full max-w-2xl bg-blue/25" />
         </header>
 
         {upcomingEvents.length === 0 ? (
@@ -48,12 +51,17 @@ export default async function EventsPage() {
       </section>
 
       {pastEvents.length > 0 ? (
-        <section className="space-y-6">
-          <header>
-            <h2 className="text-blue">Eventos pasados</h2>
-            <p className="type-small text-olive/80">
-              Guardamos un historial breve para referencia.
-            </p>
+        <section className="space-y-10">
+          <header className="space-y-4">
+            <div className="space-y-3">
+              <h2 className="font-sans text-[30px] md:text-[34px] font-bold tracking-tight text-blue">
+                Eventos pasados
+              </h2>
+              <p className="type-small text-olive/80">
+                Guardamos un historial breve para referencia.
+              </p>
+            </div>
+            <div className="h-px w-full max-w-2xl bg-olive/25" />
           </header>
 
           <EventList
@@ -64,25 +72,29 @@ export default async function EventsPage() {
         </section>
       ) : null}
 
-      <section className="space-y-3">
-        <h2 className="text-blue">Menús cerrados privados</h2>
-        <p className="type-small text-olive/80">
-          ¿Buscás un evento a medida? Escribinos para organizar una noche
-          exclusiva.
-        </p>
-        {whatsappUrl ? (
-          <a
-            href={whatsappUrl}
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex items-center gap-2 rounded-sm border border-blue/40 px-3 py-2 text-blue transition hover:border-blue/70 hover:bg-blue/5"
-          >
-            Hablemos por WhatsApp
-            <span aria-hidden="true" className="text-xs">
-              ↗
-            </span>
-          </a>
-        ) : null}
+      <section className="rounded-2xl bg-blue/5 px-6 py-10 text-center">
+        <div className="mx-auto space-y-4 max-w-2xl">
+          <h2 className="font-sans text-[30px] md:text-[34px] font-bold tracking-tight text-blue">
+            Menús cerrados privados
+          </h2>
+          <p className="type-body text-olive/80">
+            ¿Buscás un evento a medida? Escribinos para organizar una noche
+            exclusiva.
+          </p>
+          {whatsappUrl ? (
+            <a
+              href={whatsappUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-2 rounded-full border border-blue/40 px-4 py-2 text-blue transition hover:border-blue/70 hover:bg-blue/10"
+            >
+              Hablemos por WhatsApp
+              <span aria-hidden="true" className="text-xs">
+                ↗
+              </span>
+            </a>
+          ) : null}
+        </div>
       </section>
     </main>
   );
@@ -104,9 +116,14 @@ function EventList({
   }
 
   return (
-    <div className="space-y-6">
-      {events.map((event) => (
-        <EventCard key={event._id} event={event} variant={variant} />
+    <div className="space-y-20">
+      {events.map((event, index) => (
+        <EventCard
+          key={event._id}
+          event={event}
+          variant={variant}
+          isFirst={index === 0}
+        />
       ))}
     </div>
   );
@@ -115,28 +132,54 @@ function EventList({
 type EventCardProps = {
   event: EventRecord;
   variant?: "primary" | "secondary";
+  isFirst?: boolean;
 };
 
-function EventCard({ event, variant = "primary" }: EventCardProps) {
+function EventCard({
+  event,
+  variant = "primary",
+  isFirst = false,
+}: EventCardProps) {
   const { title, summary } = event;
   const dateLabel = formatEventDate(event);
+  const timeLabel = formatEventTime(event);
+  const borderClass =
+    variant === "primary" ? "border-blue/25" : "border-olive/25";
+  const dateTone = variant === "primary" ? "text-blue/80" : "text-olive/80";
 
   return (
     <article
-      className={`space-y-4 rounded-sm border px-4 py-5 sm:px-6 ${
-        variant === "primary"
-          ? "border-blue/25 bg-sand/40"
-          : "border-olive/20 bg-transparent"
+      className={`grid gap-6 lg:grid-cols-[minmax(0,3fr)_minmax(0,1fr)] lg:gap-12 ${
+        isFirst ? "" : `${borderClass} border-t pt-10`
       }`}
     >
-      <header className="space-y-2">
-        <h3 className="type-h3 text-blue">{title}</h3>
-        <p className="type-small uppercase tracking-wide text-olive/70">
-          {dateLabel}
-        </p>
-      </header>
+      <div className="space-y-4">
+        <h3 className="font-sans text-[30px] md:text-[34px] font-bold tracking-tight text-blue">
+          {title}
+        </h3>
+        {summary ? (
+          <p className="type-body text-olive/85 leading-relaxed max-w-2xl">
+            {summary}
+          </p>
+        ) : null}
+      </div>
 
-      {summary ? <p className="type-body text-olive/90">{summary}</p> : null}
+      <div className="flex items-start justify-start lg:justify-end">
+        <div className="space-y-2 text-left lg:text-right">
+          <p
+            className={`font-sans text-sm md:text-base font-semibold uppercase tracking-[0.08em] ${dateTone} whitespace-nowrap`}
+          >
+            {dateLabel}
+          </p>
+          {timeLabel ? (
+            <p
+              className={`font-sans text-xs md:text-sm font-medium uppercase tracking-[0.14em] ${dateTone} whitespace-nowrap`}
+            >
+              {timeLabel}
+            </p>
+          ) : null}
+        </div>
+      </div>
     </article>
   );
 }
@@ -165,8 +208,34 @@ function formatEventDate(event: EventRecord) {
     return "Fecha a confirmar";
   }
 
+  const sameDay =
+    start.getFullYear() === end.getFullYear() &&
+    start.getMonth() === end.getMonth() &&
+    start.getDate() === end.getDate();
+
+  if (!end || sameDay) {
+    return dateFormatter.format(start);
+  }
+
+  return `${dateFormatter.format(start)} → ${dateFormatter.format(end)}`;
+}
+
+function parseDate(value?: string) {
+  if (!value) return undefined;
+  const parsed = new Date(value);
+  return Number.isNaN(parsed.getTime()) ? undefined : parsed;
+}
+
+function formatEventTime(event: EventRecord) {
+  const start = parseDate(event.startDate);
+  const end = parseDate(event.endDate);
+
+  if (!start) {
+    return undefined;
+  }
+
   if (!end || end.getTime() === start.getTime()) {
-    return dateTimeFormatter.format(start);
+    return timeFormatter.format(start);
   }
 
   const sameDay =
@@ -175,14 +244,8 @@ function formatEventDate(event: EventRecord) {
     start.getDate() === end.getDate();
 
   if (sameDay) {
-    return `${dateFormatter.format(start)} · ${timeFormatter.format(start)} — ${timeFormatter.format(end)}`;
+    return `${timeFormatter.format(start)} — ${timeFormatter.format(end)}`;
   }
 
   return `${dateTimeFormatter.format(start)} → ${dateTimeFormatter.format(end)}`;
-}
-
-function parseDate(value?: string) {
-  if (!value) return undefined;
-  const parsed = new Date(value);
-  return Number.isNaN(parsed.getTime()) ? undefined : parsed;
 }
