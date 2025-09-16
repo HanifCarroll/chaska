@@ -208,12 +208,16 @@ function formatEventDate(event: EventRecord) {
     return "Fecha a confirmar";
   }
 
+  if (!end) {
+    return dateFormatter.format(start);
+  }
+
   const sameDay =
     start.getFullYear() === end.getFullYear() &&
     start.getMonth() === end.getMonth() &&
     start.getDate() === end.getDate();
 
-  if (!end || sameDay) {
+  if (sameDay) {
     return dateFormatter.format(start);
   }
 
@@ -234,7 +238,11 @@ function formatEventTime(event: EventRecord) {
     return undefined;
   }
 
-  if (!end || end.getTime() === start.getTime()) {
+  if (!end) {
+    return timeFormatter.format(start);
+  }
+
+  if (end.getTime() === start.getTime()) {
     return timeFormatter.format(start);
   }
 
