@@ -52,6 +52,7 @@ body {
 /* Prevent horizontal scroll caused by off-canvas transforms */
 html,
 body {
+  height: 100%;
   overflow-x: hidden;
 }
 
@@ -239,7 +240,7 @@ body {
 /* Sanity Studio adjustments */
 @layer components {
   .sanity-studio-wrapper {
-    min-height: 100vh;
+    height: 100%;
     background-color: #ffffff;
   }
 
